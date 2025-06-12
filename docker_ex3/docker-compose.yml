@@ -7,7 +7,21 @@ services:
   # TODO: add your code here (delete this line and follow the indent conventions)
   app:
     # TODO: you will need to add to this
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"
     environment:
       - REDIS_HOST=redis
+    depends_on:
+      - redis
+    restart: always
   frontend:
     # TODO: you will need to add to this
+    build:
+      context: ./frontend
+    ports:
+      - "3901:3000"
+    depends_on:
+      - app
+    restart: always
